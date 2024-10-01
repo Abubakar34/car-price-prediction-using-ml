@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #b3c6df;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Updated background color for the container */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            background-color: rgb(61 148 199 / 80%);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff; /* Updated font color for h1 */
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: #00FFFF; /* Updated font color for result */
+        }
+
+        
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="animation-bg"></div>
+    <div class="container">
+        <div class="result">
+        <h1>Your Car Price is:  {{ prediction }} </h1>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Car Price Prediction</title>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <h1>Car Price Prediction</h1>
+    <form id="predictionForm" method="POST" onsubmit="predictPrice(event)">
+        <label for="present_price">Present Price:</label>
+        <input type="number" id="present_price" name="present_price" required>
+
+        <label for="kms_driven">Driven (kms):</label>
+        <input type="number" id="kms_driven" name="kms_driven" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="owner">Owner:</label>
+        <input type="number" id="owner" name="owner" required>
+
+        <label for="fuel_type">Fuel Type:</label>
+        <select id="fuel_type" name="fuel_type" required>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+        </select>
+
+        <label for="seller_type">Seller Type:</label>
+        <select id="seller_type" name="seller_type" required>
+            <option value="Dealer">Dealer</option>
+            <option value="Individual">Individual</option>
+        </select>
+
+        <label for="transmission">Transmission:</label>
+        <select id="transmission" name="transmission" required>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+
+        <input type="submit" value="Predict">
+        <button type="button" onclick="clearForm()">Clear</button>
+
+        <div class="result" id="result"></div>
+    </form>
+
+    <script>
+        function predictPrice(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            const form = document.getElementById('predictionForm');
+            const formData = new FormData(form);
+
+            // Fetch the prediction result via AJAX
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').textContent = `Predicted Price: ${data.prediction}`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function clearForm() {
+            document.getElementById('predictionForm').reset();
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
